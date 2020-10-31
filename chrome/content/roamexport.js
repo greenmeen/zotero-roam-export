@@ -318,7 +318,7 @@ Zotero.RoamExport = Zotero.RoamExport || new class {
         var roamItem = {},
             itemChildren = [];
         roamItem.title = this.getItemTitle(item);
-        var metadata = this.getItemMetadata(item); // Get item metadata
+        var metadata = this.getItemMetadata(item).children; // Get item metadata
         itemChildren.push(metadata);
         if (item.getNotes().length) { // Get notes if there
             var notes = this.getItemNotes(item);
