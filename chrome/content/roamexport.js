@@ -181,14 +181,6 @@ Zotero.RoamExport = Zotero.RoamExport || new class {
                 "children": [{"string": itemAbstract}]
             });    
         }
-        metadata.children.push({
-            "string": `Topics:: ${this.getItemCollections(item).join(", ")}`
-        });
-        if (item.getField("date")) {
-            metadata.children.push({
-                "string": `Date:: ${item.getField("year")}`
-            });
-        }
         if (item.getField("dateAdded")) {
             const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
             var d = new Date(item.getField("dateAdded"));
@@ -204,11 +196,6 @@ Zotero.RoamExport = Zotero.RoamExport || new class {
             var roamDateAdded = `${(month[d.getMonth()])} ${d.getDate()}${nth(d.getDate())}, ${d.getFullYear()}`;
             metadata.children.push({
                 "string": `Date added:: [[${roamDateAdded}]]`
-            });
-        }
-        if (bbtCiteKey) {
-            metadata.children.push({
-                "string": `Citekey:: ${bbtCiteKey}`
             });
         }
         if (item.getAttachments().length > 0) {
@@ -325,7 +312,6 @@ Zotero.RoamExport = Zotero.RoamExport || new class {
             itemChildren.push(notes);
         }
         roamItem.children = itemChildren;
-        roamItem["edit-time"] = Date.parse(item.getField("dateModified")) / 1000;
         return roamItem;
     }
 
